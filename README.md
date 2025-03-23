@@ -1,4 +1,4 @@
-# Rage: A Rust-Based Git Repo Manager (Like GitHub, But Cooler)
+# Rage: A Rust-Based Git Repo Manager (Like CGit/Gogs, But Cooler)
 
 Rage is a self-hosted Git repository manager that looks a bit like Gogs or CGit. It lets you create repositories, manage users,
 track issues, and collaborate with teams—basically, it's CGit but not CGit.
