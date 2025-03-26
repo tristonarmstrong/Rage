@@ -63,6 +63,6 @@ Rage even better!
 
 ## License
 
-This project is MIT-licensed, so feel free to use and modify it as you like. Check out the `LICENSE` file for details.
+This project is GPL-licensed, so feel free to use and modify it as you like. Check out the `LICENSE` file for details.
 
 ---
