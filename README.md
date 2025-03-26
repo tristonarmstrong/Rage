@@ -1,4 +1,6 @@
-![rage logo](assets/image-2.png "Rage Logo")
+<p align="center">
+   <img src="assets/image-2.png" alt="Rage Logo" width="400"/>
+</p>
 
 # Rage: A Rust-Based Git Repo Manager (Like CGit/Gogs, But Cooler)
 
