@@ -25,7 +25,6 @@ impl Server {
         let listener = TcpListener::bind(&self.addr).unwrap();
         loop {
             match listener.accept() {
-                //TODO: somewhere here is where im going to check git directories?
                 Ok((mut stream, _)) => Self::handle_client(&mut stream, &mut handler),
                 Err(e) => println!("Failed to establish a connection: {}", e),
             }
