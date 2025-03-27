@@ -10,8 +10,6 @@ track issues, and collaborate with teams—basically, it's CGit but not CGit.
 ## Features
 
 - 🚀 **Repository Management**: Create, clone, and manage your Git repos.
-- 🔑 **User Authentication**: Secure user accounts for your instance.
-- 💻 **Team Collaboration**: Organize users into teams to share repositories.
 - 🛠 **Forking & Pull Requests**: Fork repos and submit PRs like the pros.
 - 📝 **Issue Tracking**: Track issues, pull requests, and more.
 - 🔧 **Permissions**: Fine-grained access control for repos and teams.
