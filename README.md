@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="assets/goblin_mode.svg" alt="Rage Logo" width="400"/>
+   <img src="assets/goblin_mode.svg" alt="Rage Logo" width="300"/>
 </p>
 
 # Rage: A Rust-Based Git Repo Manager (Like CGit/Gogs, But Cooler)
