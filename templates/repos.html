@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html class="bg-gray-100" lang="en">
+<head>
+    <title>Triston's Git Mirror</title>
+    <meta content="cgit v1.2.3-70-g09d2" name="generator">
+    <meta content="noindex, nofollow" name="robots">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="">
+<div class="">
+    <div class="">
+        <h1 class="">Triston's Git Mirror</h1>
+        <p class="">Thank you for stopping by!</p>
+    </div>
+
+    <hr/>
+
+    <div class="">
+        <a class="" href="/">Index</a>
+    </div>
+
+    <hr/>
+    <div class="">
+        <table class="">
+            <caption class="">Repository List</caption>
+            <thead class="">
+            <tr>
+                <th class="" scope="col">
+                    <a class="" href="/?s=name">Name</a>
+                </th>
+                <th class="" scope="col">
+                    <a class="" href="/?s=desc">Description</a>
+                </th>
+                <th class="" scope="col">
+                    <a class="" href="/?s=owner">Owner</a>
+                </th>
+                <th class="" scope="col">
+                    <span class="" data-ut="1608612400" title="2020-12-22 04:46:40 +000">Idle</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody class="">
+            {% for file in files %}
+            <tr>
+                <td class="">
+                    <a href="{{file}}">{{file}}</a>
+                </td>
+                <td class="">
+                    <a href="#">Some Description</a>
+                </td>
+                <td class="">
+                    <a  href="#">Triston Armstrong</a>
+                </td>
+                <td class="">
+                    <span data-ut="1608612400" title="2020-12-22 04:46:40 +00">100 years</span>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="">
+        <p class="">© 2023 Triston's Git Mirror. All rights reserved.</p>
+    </footer>
+</div>
+</body>
+</html>
