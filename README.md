@@ -54,7 +54,7 @@ If you want to help out or just mess around with Rage, feel free to fork the rep
 
 ## Want to Chat?
 
-Got questions or ideas? Hit me up on GitHub or join the [Discussions](https://github.com/yourusername/rage/discussions). Let's make
+Got questions or ideas? Hit me up on GitHub or join the [Discussions](https://github.com/tristonarmstrong/rage/discussions). Let's make
 Rage even better!
 
 ---
