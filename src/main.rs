@@ -2,10 +2,12 @@ use server::Server;
 use std::env;
 use website_handler::WebsiteHandler;
 
-mod http;
-mod server;
-mod website_handler;
 mod generation_templates;
+mod http;
+mod page_generator;
+mod server;
+mod utils;
+mod website_handler;
 
 fn main() {
     let default_path = format!("{}/public", env!("CARGO_MANIFEST_DIR"));
