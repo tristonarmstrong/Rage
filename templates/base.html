@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="bg-gray-100" lang="en">
+<html class="bg-gray-100 leading-none" lang="en">
 <head>
     <title>Triston's Git Mirror</title>
     <meta content="cgit v1.2.3-70-g09d2" name="generator">
@@ -8,21 +8,27 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="p-4 container m-auto">
+<body class="p-4 container m-auto flex flex-col gap-4">
     <header>
+    {% block header %}
         <h1 class="text-4xl">Triston's Git</h1>
         <small>Welcome to mothership GIT. Take a look around!</small>
+    {% endblock header %}
     </header> 
 
-    <hr class="border-1 my-2">
+    <nav>
+        {% block nav %}
+        <a href="/">index</a>
+        {% endblock nav %}
+        <hr class="border-1 border-gray-500 m-0 p-0">
+    </nav
 
     <main>
         {% block content %}<p>...loading</p>{% endblock %}
     </main>
 
-    <hr class="border-1 my-2">
-
-    <footer class="text-center">
+    <footer class="text-center text-gray-300">
+        <hr class="border-1">
         <small class="">© 2023 Triston's Git Mirror. All rights reserved.</small>
     </footer>
 </body>
