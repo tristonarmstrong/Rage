@@ -1,14 +1,20 @@
 use askama::Template;
 
 #[derive(Template)]
-#[template(path = "repos.html", ext = "html")]
-pub struct LandingTemplate {
-    pub files: Vec<RepoListItem>,
+#[template(path = "account_index.html", ext = "html")]
+pub struct AccountIndexTemplate {
+    pub files: Vec<RepoListItemTemplate>,
+}
+
+#[derive(Template)]
+#[template(path = "account_about.html", ext = "html")]
+pub struct AccountAboutTemplate<'a> {
+    pub description: Vec<&'a str>,
 }
 
 #[derive(Template)]
 #[template(path = "repo_list_item.html", ext = "html")]
-pub struct RepoListItem {
+pub struct RepoListItemTemplate {
     pub path: String,
     pub name: String,
     pub description: String,
