@@ -1,5 +1,3 @@
-use std::fs;
-
 const MINUTE_SECONDS: u64 = 60;
 const HOUR_SECONDS: u64 = 3_600;
 const DAY_SECONDS: u64 = 86_400;
@@ -48,12 +46,12 @@ impl Logger {
     pub fn err(msg: &str) -> () {
         let cls = TermColors::CLS.as_str();
         let color = TermColors::ERR.as_str();
-        println!("{color}[ INFO ]{cls} - {msg}")
+        println!("{color}[ ERROR ]{cls} - {msg}")
     }
 
     pub fn warn(msg: &str) -> () {
         let cls = TermColors::CLS.as_str();
         let color = TermColors::WARN.as_str();
-        println!("{color}[ INFO ]{cls} - {msg}")
+        println!("{color}[ WARN ]{cls} - {msg}")
     }
 }
