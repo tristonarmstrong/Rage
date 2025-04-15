@@ -25,15 +25,19 @@ impl WebsiteHandler {
         Response::new(StatusCode::OK, Some(generate_about_page().unwrap()))
     }
 
-    fn produce_favicon(&self) -> Response {
-        let ico_dir = Path::join(Path::new(&self.public_path), "favicon.ico");
-        let contents = fs::read_to_string(ico_dir);
-        match contents {
-            Ok(c) => Response::new(StatusCode::OK, Some(c)),
-            Err(e) => {
-                Logger::err(&e.to_string());
-                Response::new(StatusCode::NotFound, Some(e.to_string()))
+    fn read_file(&self, file_path: &str) -> Option<String> {
+        let path = format!("{}/{}", self.public_path, file_path);
+        match fs::canonicalize(path) {
+            Ok(path) => {
+                if path.starts_with(&self.public_path) {
+                    return fs::read_to_string(path).ok();
+                }
+                Logger::warn(
+                    format!("Directory traversal attack attempted: {}", file_path).as_str(),
+                );
+                None
             }
+            Err(_) => None,
         }
     }
 
@@ -41,10 +45,14 @@ impl WebsiteHandler {
         match request.path() {
             "/" => self.produce_index(),
             "/about" => self.produce_about(),
-            "/favicon.ico" => self.produce_favicon(),
-            path => match path {
-                "bob" => Response::new(StatusCode::OK, Some("DUMY PATH".to_string())),
-                _ => Response::new(StatusCode::NotFound, None),
+            path => match self.read_file(path) {
+                Some(file) => Response::new(StatusCode::OK, Some(file)),
+                _ => {
+                    Logger::warn(
+                        format!("Attempt to retrieve file {} failed", request.path()).as_str(),
+                    );
+                    Response::new(StatusCode::NotFound, None)
+                }
             },
         }
     }
