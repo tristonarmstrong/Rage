@@ -1,5 +1,5 @@
 pub use method::Method;
-pub use query_string::{QueryString, Value as QueryStringValue};
+pub use query_string::QueryString;
 pub use request::{ParserError, Request};
 pub use response::Response;
 pub use status_code::StatusCode;
