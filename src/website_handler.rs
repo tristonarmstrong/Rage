@@ -1,4 +1,8 @@
+use std::fs;
+use std::path::Path;
+
 use crate::page_generator::{generate_about_page, generate_landing_page};
+use crate::utils::Logger;
 use crate::{
     http::{Method, Request, Response, StatusCode},
     server::Handler,
@@ -21,10 +25,23 @@ impl WebsiteHandler {
         Response::new(StatusCode::OK, Some(generate_about_page().unwrap()))
     }
 
+    fn produce_favicon(&self) -> Response {
+        let ico_dir = Path::join(Path::new(&self.public_path), "favicon.ico");
+        let contents = fs::read_to_string(ico_dir);
+        match contents {
+            Ok(c) => Response::new(StatusCode::OK, Some(c)),
+            Err(e) => {
+                Logger::err(&e.to_string());
+                Response::new(StatusCode::NotFound, Some(e.to_string()))
+            }
+        }
+    }
+
     fn handle_get(&mut self, request: &Request) -> Response {
         match request.path() {
             "/" => self.produce_index(),
             "/about" => self.produce_about(),
+            "/favicon.ico" => self.produce_favicon(),
             path => match path {
                 "bob" => Response::new(StatusCode::OK, Some("DUMY PATH".to_string())),
                 _ => Response::new(StatusCode::NotFound, None),
