@@ -1,4 +1,5 @@
 use crate::http::{ParserError, Request, Response, StatusCode};
+use crate::utils::Logger;
 use std::convert::TryFrom;
 use std::io::Read;
 use std::net::{TcpListener, TcpStream};
@@ -6,7 +7,7 @@ use std::net::{TcpListener, TcpStream};
 pub trait Handler {
     fn handle_request(&mut self, request: &Request) -> Response;
     fn handle_bad_request(&mut self, e: &ParserError) -> Response {
-        println!("Failed to handle request: {:?}", e);
+        Logger::err(format!("Failed to handle request: {e:?}").as_str());
         Response::new(StatusCode::BadRequest, None)
     }
 }
@@ -26,7 +27,7 @@ impl Server {
         loop {
             match listener.accept() {
                 Ok((mut stream, _)) => Self::handle_client(&mut stream, &mut handler),
-                Err(e) => println!("Failed to establish a connection: {}", e),
+                Err(e) => Logger::err(format!("Failed to establish a connection: {}", e).as_str()),
             }
         }
     }
@@ -42,10 +43,10 @@ impl Server {
                 };
 
                 if let Err(e) = response.send(stream) {
-                    println!("Failed to send response: {}", e);
+                    Logger::err(format!("Failed to send response: {}", e).as_str());
                 }
             }
-            Err(e) => println!("Failed to read from connection: {}", e),
+            Err(e) => Logger::err(format!("Failed to read from connection: {}", e).as_str()),
         }
     }
 }
