@@ -19,17 +19,41 @@ pub(crate) fn calculate_modified_time(time: u64) -> String {
     }
 }
 
-pub(crate) fn read_file(file_path: &str, pub_path: &str) -> Option<String> {
-    let path = format!("{}/{}", pub_path, file_path);
-    match fs::canonicalize(path) {
-        Ok(path) => {
-            if path.starts_with(pub_path) {
-                return fs::read_to_string(path).ok();
-            }
+enum TermColors {
+    INFO,
+    ERR,
+    WARN,
+    CLS,
+}
 
-            None
+impl TermColors {
+    const fn as_str(self) -> &'static str {
+        match self {
+            Self::INFO => "\x1b[34m",
+            Self::CLS => "\x1b[0m",
+            Self::ERR => "\x1b[31m",
+            Self::WARN => "\x1b[33m",
         }
+    }
+}
 
-        Err(_) => None,
+pub(crate) struct Logger;
+impl Logger {
+    pub fn info(msg: &str) -> () {
+        let cls = TermColors::CLS.as_str();
+        let color = TermColors::INFO.as_str();
+        println!("{color}[ INFO ]{cls} - {msg}")
+    }
+
+    pub fn err(msg: &str) -> () {
+        let cls = TermColors::CLS.as_str();
+        let color = TermColors::ERR.as_str();
+        println!("{color}[ INFO ]{cls} - {msg}")
+    }
+
+    pub fn warn(msg: &str) -> () {
+        let cls = TermColors::CLS.as_str();
+        let color = TermColors::WARN.as_str();
+        println!("{color}[ INFO ]{cls} - {msg}")
     }
 }
