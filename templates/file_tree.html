@@ -1,0 +1,26 @@
+{% extends "base.html" %}    
+
+{% block header %}
+{% call super() %}
+{% endblock header %}
+
+{% block nav %}
+    <div>
+        <a href="/about" >about</a>
+        <a href="/" >summary</a>
+        <a href="/refs" >refs</a>
+        <a href="/log" >log</a>
+        <a href="/tree" >tree</a>
+        <a href="/commit" >commit</a>
+        <a href="/diff" >diff</a>
+        <a href="/stats" >stats</a>
+    </div>
+{% endblock nav %}
+
+{% block content %}
+  <div >
+    {% for file in file_layer.files %}
+      <a href="{{file.path}}">{{file.name}}</a>
+    {% endfor %}
+  </div>
+{% endblock content %}

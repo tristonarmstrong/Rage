@@ -1,6 +1,8 @@
 use crate::{
-    generation_templates::{AccountAboutTemplate, AccountIndexTemplate, RepoListItemTemplate},
-    utils::calculate_modified_time,
+    generation_templates::{
+        self, AccountAboutTemplate, AccountIndexTemplate, FileTreeTemplate, RepoListItemTemplate,
+    },
+    utils::{calculate_modified_time, generate_file_list_from_path},
 };
 use askama::Template;
 use std::{fs, io::Error};
@@ -19,6 +21,13 @@ pub(crate) fn generate_about_page() -> Result<String, askama::Error> {
     .render()
 }
 
+pub(crate) fn generate_repo_page(path: &str) -> Result<String, askama::Error> {
+    // all repos and tags are kept in packed-refs( hash - path )
+    // generate readme page first
+    // get file tree + last commit per file + time since last change
+    let dir = generate_file_list_from_path(path);
+    FileTreeTemplate { file_layer: dir }.render()
+}
 pub(crate) fn generate_landing_page() -> Result<String, Error> {
     let repo_path = get_repo_path();
     let mut repo_list = vec![];

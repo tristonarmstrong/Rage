@@ -1,12 +1,10 @@
-use std::fs;
-use std::path::Path;
-
-use crate::page_generator::{generate_about_page, generate_landing_page};
+use crate::page_generator::{generate_about_page, generate_landing_page, generate_repo_page};
 use crate::utils::Logger;
 use crate::{
     http::{Method, Request, Response, StatusCode},
     server::Handler,
 };
+use std::fs;
 
 pub struct WebsiteHandler {
     public_path: String,
@@ -23,6 +21,11 @@ impl WebsiteHandler {
 
     fn produce_about(&self) -> Response {
         Response::new(StatusCode::OK, Some(generate_about_page().unwrap()))
+    }
+
+    fn produce_repo(&self, path: &str) -> Response {
+        Logger::info(format!("hit -> {}", path).as_str());
+        Response::new(StatusCode::OK, Some(generate_repo_page(path).unwrap()))
     }
 
     fn read_file(&self, file_path: &str) -> Option<String> {
@@ -45,14 +48,17 @@ impl WebsiteHandler {
         match request.path() {
             "/" => self.produce_index(),
             "/about" => self.produce_about(),
-            path => match self.read_file(path) {
-                Some(file) => Response::new(StatusCode::OK, Some(file)),
-                _ => {
-                    Logger::warn(
-                        format!("Attempt to retrieve file {} failed", request.path()).as_str(),
-                    );
-                    Response::new(StatusCode::NotFound, None)
-                }
+            path => match path {
+                p if p.starts_with("/repo") => self.produce_repo(path),
+                path => match self.read_file(path) {
+                    Some(file) => Response::new(StatusCode::OK, Some(file)),
+                    None => {
+                        Logger::warn(
+                            format!("Attempt to retrieve file {} failed", request.path()).as_str(),
+                        );
+                        Response::new(StatusCode::NotFound, None)
+                    }
+                },
             },
         }
     }
@@ -62,14 +68,20 @@ impl Handler for WebsiteHandler {
     fn handle_request(&mut self, request: &Request) -> Response {
         match request.method() {
             Method::GET => self.handle_get(request),
-            Method::POST => todo!(),
-            Method::OPTIONS => todo!(),
-            Method::PUT => todo!(),
-            Method::DELETE => todo!(),
-            Method::HEAD => todo!(),
-            Method::CONNECT => todo!(),
-            Method::TRACE => todo!(),
-            Method::PATCH => todo!(),
+            Method::POST => Response::new(StatusCode::BadRequest, Some("Not Allowed".to_string())),
+            Method::OPTIONS => {
+                Response::new(StatusCode::BadRequest, Some("Not Allowed".to_string()))
+            }
+            Method::PUT => Response::new(StatusCode::BadRequest, Some("Not Allowed".to_string())),
+            Method::DELETE => {
+                Response::new(StatusCode::BadRequest, Some("Not Allowed".to_string()))
+            }
+            Method::HEAD => Response::new(StatusCode::BadRequest, Some("Not Allowed".to_string())),
+            Method::CONNECT => {
+                Response::new(StatusCode::BadRequest, Some("Not Allowed".to_string()))
+            }
+            Method::TRACE => Response::new(StatusCode::BadRequest, Some("Not Allowed".to_string())),
+            Method::PATCH => Response::new(StatusCode::BadRequest, Some("Not Allowed".to_string())),
         }
     }
 }

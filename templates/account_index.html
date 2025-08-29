@@ -7,37 +7,37 @@
 
 {% block nav %}
     <div>
-        <a href="/" class="bg-gray-500 text-white p-0 m-0 px-1">index</a>
-        <a href="/about" class="p-0 m-0 px-1">about</a>
+        <a href="/" >index</a>
+        <a href="/about" >about</a>
     </div>
 {% endblock nav %}
 
 
 {% block content %}
-    <div class="flex flex-col gap-2">
-        <table class="text-xs">
-            <thead class="text-gray-800">
-                <tr class="text-left">
-                    <th class="" scope="col">
-                        <a class="" href="/?s=name">Name</a>
+    <div >
+        <table >
+            <thead >
+                <tr >
+                    <th >
+                        <a >Name</a>
                     </th>
-                    <th class="" scope="col">
-                        <a class="" href="/?s=desc">Description</a>
+                    <th >
+                        <a >Description</a>
                     </th>
-                    <th class="" scope="col">
-                        <a class="" href="/?s=owner">Owner</a>
+                    <th >
+                        <a >Owner</a>
                     </th>
-                    <th class="" scope="col">
-                        <span class="" data-ut="1608612400" title="2020-12-22 04:46:40 +000">Idle</span>
+                    <th >
+                        <span >Idle</span>
                     </th>
                 </tr>
             </thead>
             <tbody>
 
             {% for file in files %}
-                <tr class="odd:bg-gray-200 hover:bg-gray-300 cursor-pointer p-4">
+                <tr >
                   <td>
-                    <span>{{file.name}}</span>
+                    <a href="{{file.name}}/root">{{file.name}}</a>
                   </td>
                   <td >
                     <span>{{file.description}}</span>
@@ -55,16 +55,16 @@
         </table>
     </div>
 
-    <dialog class="mx-auto p-2 rounded shadow-lg ">
-        <h2 class="text-md text-gray-700 font-bold">Get Repo From GitHub</h2>
-        <p class="text-sm text-gray-500">With this, you'll be able to rip a repo from github and manage it here</p>
-        <div class="flex flex-col gap-2">
+    <dialog >
+        <h2 >Get Repo From GitHub</h2>
+        <p >With this, you'll be able to rip a repo from github and manage it here</p>
+        <div >
             <hr>
             <label html-for="repo-link">Repo Link</label>
-            <input class="border border-gray-300" id="repo-link" name="repo-link" placholder="Repo Link"/>
+            <input />
             <hr>
         </div>
-        <div class="flex gap-1 justify-end">
+        <div >
             <button>cancel</button>
             <button>pull</button>
         </div>

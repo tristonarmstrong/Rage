@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="bg-gray-100 leading-none" lang="en">
+<html >
 <head>
     <title>Triston's Git Mirror</title>
     <link rel="icon" type="image/png" href="/favicon.svg"> 
@@ -9,10 +9,10 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="p-4 container m-auto flex flex-col gap-4">
+<body >
     <header>
     {% block header %}
-        <h1 class="text-4xl">Triston's Git</h1>
+        <h1 >Triston's Git</h1>
         <small>Welcome to mothership GIT. Take a look around!</small>
     {% endblock header %}
     </header> 
@@ -21,16 +21,16 @@
         {% block nav %}
         <a href="/">index</a>
         {% endblock nav %}
-        <hr class="border-1 border-gray-500 m-0 p-0">
+        <hr >
     </nav
 
     <main>
         {% block content %}<p>...loading</p>{% endblock %}
     </main>
 
-    <footer class="text-center text-gray-300">
-        <hr class="border-1">
-        <small class="">© 2023 Triston's Git Mirror. All rights reserved.</small>
+    <footer >
+        <hr >
+        <small >© 2023 Triston's Git Mirror. All rights reserved.</small>
     </footer>
 </body>
 </html>

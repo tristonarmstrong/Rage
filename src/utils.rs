@@ -1,3 +1,5 @@
+use std::fs;
+
 const MINUTE_SECONDS: u64 = 60;
 const HOUR_SECONDS: u64 = 3_600;
 const DAY_SECONDS: u64 = 86_400;
@@ -54,4 +56,40 @@ impl Logger {
         let color = TermColors::WARN.as_str();
         println!("{color}[ WARN ]{cls} - {msg}")
     }
+}
+
+pub(crate) struct FileItem {
+    pub name: String,
+    pub path: String,
+}
+pub(crate) struct FileTreeLayer {
+    pub files: Vec<FileItem>,
+}
+pub(crate) fn generate_file_list_from_path(path: &str) -> FileTreeLayer {
+    let split = path.split_once("/repo/");
+    if split.is_none() {
+        Logger::err("Failed to get repo name");
+        panic!();
+    }
+
+    let repo = split.unwrap().1;
+    let path_of_repo = format!("{}/repos/{}", env!("CARGO_MANIFEST_DIR"), repo);
+
+    let dir = fs::read_dir(&path_of_repo)
+        .inspect_err(|_e| {
+            Logger::err("Failed to get repo directory");
+            panic!();
+        })
+        .unwrap();
+    let dir: Vec<FileItem> = dir
+        .map(|x| {
+            let y = x.unwrap();
+            let f = FileItem {
+                name: String::from(y.file_name().to_str().unwrap()),
+                path: String::from(y.path().to_str().unwrap()),
+            };
+            f
+        })
+        .collect();
+    FileTreeLayer { files: dir }
 }

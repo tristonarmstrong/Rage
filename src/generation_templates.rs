@@ -1,5 +1,7 @@
 use askama::Template;
 
+use crate::utils::FileTreeLayer;
+
 #[derive(Template)]
 #[template(path = "account_index.html", ext = "html")]
 pub struct AccountIndexTemplate {
@@ -20,4 +22,10 @@ pub struct RepoListItemTemplate {
     pub description: String,
     pub author: String,
     pub last_edited: String,
+}
+
+#[derive(Template)]
+#[template(path = "file_tree.html", ext = "html")]
+pub struct FileTreeTemplate {
+    pub file_layer: FileTreeLayer,
 }
